@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <nav className="p-12 pt-8">
+        <nav className="p-12 pt-8 max-w-screen-lg mx-auto">
           <div className="flex justify-center gap-x-4 p-2">
             <Link href="/">Overview</Link>•<Link href="/quests">Quests</Link>•
             <Link href="/achievements">Achievements</Link>•
