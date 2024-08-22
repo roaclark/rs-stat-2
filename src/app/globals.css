@@ -19,3 +19,12 @@ body {
   background: var(--background);
   font-synthesis: none;
 }
+
+@layer base {
+  h1 {
+    @apply text-4xl font-medium;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}

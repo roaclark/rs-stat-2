@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import skills from "../../skills";
 
 export default function Skill({ params }: { params: { skill: string } }) {
-  if (!skills.includes(params.skill)) {
+  if (!Object.keys(skills).includes(params.skill)) {
     notFound();
   }
 
@@ -14,5 +14,5 @@ export default function Skill({ params }: { params: { skill: string } }) {
 }
 
 export async function generateStaticParams() {
-  return skills.map((skill) => ({ skill }));
+  return Object.keys(skills).map((skill) => ({ skill }));
 }

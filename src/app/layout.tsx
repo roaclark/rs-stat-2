@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <nav className="p-12 pt-8 max-w-screen-lg mx-auto">
+        <nav className="p-12 pt-8 pb-0 max-w-screen-lg mx-auto">
           <div className="flex justify-center gap-x-4 p-2">
             <Link href="/">Overview</Link>•<Link href="/quests">Quests</Link>•
             <Link href="/achievements">Achievements</Link>•
@@ -36,17 +36,19 @@ export default function RootLayout({
           </div>
           <Divider />
           <div className="flex flex-wrap justify-center gap-x-2 p-2 pt-4">
-            {skills.map((skill, i) => {
+            {_.keys(skills).map((skill, i) => {
               return (
                 <>
                   {i > 0 ? "•" : undefined}
-                  <Link href={`/skills/${skill}`}>{_.capitalize(skill)}</Link>
+                  <Link href={`/skills/${skills[skill].name}`}>
+                    {skills[skill].name}
+                  </Link>
                 </>
               );
             })}
           </div>
         </nav>
-        {children}
+        <div className="p-8">{children}</div>
       </body>
     </html>
   );
