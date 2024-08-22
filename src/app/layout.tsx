@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import _ from "lodash";
+import { Divider } from "@mui/material";
+import Link from "next/link";
+import skills from "./skills";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -24,6 +28,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <nav className="p-12 pt-8">
+          <div className="flex justify-center gap-x-4 p-2">
+            <Link href="/">Overview</Link>•<Link href="/quests">Quests</Link>•
+            <Link href="/achievements">Achievements</Link>•
+            <Link href="/combat">Combat</Link>
+          </div>
+          <Divider />
+          <div className="flex flex-wrap justify-center gap-x-2 p-2 pt-4">
+            {skills.map((skill, i) => {
+              return (
+                <>
+                  {i > 0 ? "•" : undefined}
+                  <Link href={`/skills/${skill}`}>{_.capitalize(skill)}</Link>
+                </>
+              );
+            })}
+          </div>
+        </nav>
         {children}
       </body>
     </html>

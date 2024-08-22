@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-
-const skills = ["defence"];
+import skills from "../../skills";
 
 export default function Skill({ params }: { params: { skill: string } }) {
   if (!skills.includes(params.skill)) {
