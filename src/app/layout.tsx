@@ -47,7 +47,7 @@ export default function RootLayout({
                   return (
                     <>
                       {i > 0 ? "•" : undefined}
-                      <Link href={`/skills/${skills[skill].name}`}>
+                      <Link href={`/skills/${skill}`}>
                         {skills[skill].name}
                       </Link>
                     </>
