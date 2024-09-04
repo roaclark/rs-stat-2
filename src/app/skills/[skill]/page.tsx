@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import skills from "../../skills";
+import skills from "../../../data/skills";
 
 export default function Skill({ params }: { params: { skill: string } }) {
   if (!Object.keys(skills).includes(params.skill)) {

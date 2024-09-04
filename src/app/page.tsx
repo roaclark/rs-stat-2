@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import _ from "lodash";
 
-import skills from "./skills";
+import skills from "../data/skills";
 
 const statsGridOrder = [
   "attack",
