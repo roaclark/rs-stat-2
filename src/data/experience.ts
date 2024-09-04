@@ -1,4 +1,4 @@
-export const levelToExperinceMap = {
+const levelToExperinceMap: { [key: number]: number } = {
   1: 0,
   2: 83,
   3: 174,
@@ -99,3 +99,4 @@ export const levelToExperinceMap = {
   98: 11805606,
   99: 13034431,
 };
+export default levelToExperinceMap;
