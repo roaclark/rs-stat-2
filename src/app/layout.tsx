@@ -9,6 +9,7 @@ import skills from "../data/skills";
 
 import theme from "./theme";
 import "./globals.css";
+import PlayerLevelProvider from "@/context/PlayerLevelContext";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -55,7 +56,9 @@ export default function RootLayout({
                 })}
               </div>
             </nav>
-            <div className="p-8">{children}</div>
+            <PlayerLevelProvider>
+              <div className="p-8">{children}</div>
+            </PlayerLevelProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

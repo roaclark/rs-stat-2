@@ -10,6 +10,7 @@ import {
 import _ from "lodash";
 
 import skills from "../data/skills";
+import ClientLevel from "./ClientLevel";
 
 const statsGridOrder = [
   "attack",
@@ -76,6 +77,7 @@ export default function Overview() {
           );
         })}
         {/* TODO stat refresh button */}
+        <ClientLevel skill="agility" />
       </div>
       <div className="pt-8">
         <TableContainer>
