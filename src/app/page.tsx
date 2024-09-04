@@ -58,7 +58,7 @@ const LevelChip = ({
 };
 
 export default function Overview() {
-  // TODO
+  // TODO levels
   const levels = _.fromPairs(_.map(statsGridOrder, (s) => [s, 30]));
 
   return (
@@ -67,7 +67,7 @@ export default function Overview() {
       <div className="grid grid-cols-3 max-w-xs gap-2 gap-x-6 pt-4">
         {statsGridOrder.map((key) => {
           return (
-            <div className="flex gap-2">
+            <div className="flex gap-2" key={key}>
               <div className="rounded-full h-8 w-8 mx-auto overflow-hidden border-2 flex items-center justify-center dark:bg-gray-300">
                 <img className="object-cover" src={skills[key].icon} />
               </div>
@@ -75,6 +75,7 @@ export default function Overview() {
             </div>
           );
         })}
+        {/* TODO stat refresh button */}
       </div>
       <div className="pt-8">
         <TableContainer>
@@ -99,7 +100,10 @@ export default function Overview() {
                   <TableCell>{skill.name}</TableCell>
                   <TableCell align="right">{levels[key]}</TableCell>
                   <TableCell align="right">
-                    <LevelChip target={10} /* TODO */ current={levels[key]} />
+                    <LevelChip
+                      target={10}
+                      /* TODO quest levels */ current={levels[key]}
+                    />
                   </TableCell>
                   <TableCell align="right">
                     <LevelChip
