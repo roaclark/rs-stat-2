@@ -37,7 +37,30 @@ const statsGridOrder = [
   "hunter",
 ];
 
+const LevelChip = ({
+  target,
+  current,
+}: {
+  target: number;
+  current: number;
+}) => {
+  if (target === 0) {
+    return;
+  }
+  return (
+    <Chip
+      label={target}
+      color={current < target ? "error" : "success"}
+      size="small"
+      variant="outlined"
+    />
+  );
+};
+
 export default function Overview() {
+  // TODO
+  const levels = _.fromPairs(_.map(statsGridOrder, (s) => [s, 30]));
+
   return (
     <div className="font-sans flex flex-col items-center">
       <h1 className="pb-4">Overview</h1>
@@ -48,7 +71,7 @@ export default function Overview() {
               <div className="rounded-full h-8 w-8 mx-auto overflow-hidden border-2 flex items-center justify-center dark:bg-gray-300">
                 <img className="object-cover" src={skills[key].icon} />
               </div>
-              <p>30</p>
+              <p>{levels[key]}</p>
             </div>
           );
         })}
@@ -74,45 +97,32 @@ export default function Overview() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell>{skill.name}</TableCell>
-                  <TableCell align="right">{30}</TableCell>
+                  <TableCell align="right">{levels[key]}</TableCell>
                   <TableCell align="right">
-                    <Chip
-                      label={10}
-                      color="success"
-                      size="small"
-                      variant="outlined"
+                    <LevelChip target={10} /* TODO */ current={levels[key]} />
+                  </TableCell>
+                  <TableCell align="right">
+                    <LevelChip
+                      target={skill.diaryLevels.easy}
+                      current={levels[key]}
                     />
                   </TableCell>
                   <TableCell align="right">
-                    <Chip
-                      label={40}
-                      color="success"
-                      size="small"
-                      variant="outlined"
+                    <LevelChip
+                      target={skill.diaryLevels.medium}
+                      current={levels[key]}
                     />
                   </TableCell>
                   <TableCell align="right">
-                    <Chip
-                      label={50}
-                      color="success"
-                      size="small"
-                      variant="outlined"
+                    <LevelChip
+                      target={skill.diaryLevels.hard}
+                      current={levels[key]}
                     />
                   </TableCell>
                   <TableCell align="right">
-                    <Chip
-                      label={60}
-                      color="success"
-                      size="small"
-                      variant="outlined"
-                    />
-                  </TableCell>
-                  <TableCell align="right">
-                    <Chip
-                      label={70}
-                      color="error"
-                      size="small"
-                      variant="outlined"
+                    <LevelChip
+                      target={skill.diaryLevels.elite}
+                      current={levels[key]}
                     />
                   </TableCell>
                 </TableRow>
