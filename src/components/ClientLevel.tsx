@@ -4,10 +4,10 @@ import { PlayerLevelContext } from "@/context/PlayerLevelContext";
 import { use } from "react";
 
 const ClientLevel = ({ skill }: { skill: string }) => {
-  const { update, stats, isPending } = use(PlayerLevelContext);
+  const { stats, isPending } = use(PlayerLevelContext);
   if (isPending) {
-    return <div>?</div>;
+    return <p>?</p>;
   }
-  return <div onClick={update}>{stats[skill]?.level || "-"}</div>;
+  return <p>{stats[skill]?.level || "-"}</p>;
 };
 export default ClientLevel;

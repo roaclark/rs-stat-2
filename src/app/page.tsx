@@ -10,7 +10,8 @@ import {
 import _ from "lodash";
 
 import skills from "../data/skills";
-import ClientLevel from "./ClientLevel";
+import ClientLevel from "../components/ClientLevel";
+import LevelUpdateButton from "../components/LevelUpdateButton";
 
 const statsGridOrder = [
   "attack",
@@ -65,19 +66,22 @@ export default function Overview() {
   return (
     <div className="font-sans flex flex-col items-center">
       <h1 className="pb-4">Overview</h1>
-      <div className="grid grid-cols-3 max-w-xs gap-2 gap-x-6 pt-4">
+      <div className="grid grid-cols-3 max-w-xs gap-2 gap-x-8 pt-4">
         {statsGridOrder.map((key) => {
           return (
-            <div className="flex gap-2" key={key}>
+            <div className="flex gap-2 items-center" key={key}>
               <div className="rounded-full h-8 w-8 mx-auto overflow-hidden border-2 flex items-center justify-center dark:bg-gray-300">
                 <img className="object-cover" src={skills[key].icon} />
               </div>
-              <p>{levels[key]}</p>
+              <div className="w-6">
+                <ClientLevel skill={key} />
+              </div>
             </div>
           );
         })}
-        {/* TODO stat refresh button */}
-        <ClientLevel skill="agility" />
+        <div className="self-center justify-self-center">
+          <LevelUpdateButton />
+        </div>
       </div>
       <div className="pt-8">
         <TableContainer>
