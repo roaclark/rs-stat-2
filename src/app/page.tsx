@@ -5,13 +5,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Chip,
 } from "@mui/material";
 import _ from "lodash";
 
-import skills from "../data/skills";
-import ClientLevel from "../components/ClientLevel";
-import LevelUpdateButton from "../components/LevelUpdateButton";
+import skills from "@/data/skills";
+import ClientLevel from "@/components/ClientLevel";
+import LevelUpdateButton from "@/components/LevelUpdateButton";
+import { LevelChip } from "./LevelChip";
 
 const statsGridOrder = [
   "attack",
@@ -39,30 +39,7 @@ const statsGridOrder = [
   "hunter",
 ];
 
-const LevelChip = ({
-  target,
-  current,
-}: {
-  target: number;
-  current: number;
-}) => {
-  if (target === 0) {
-    return;
-  }
-  return (
-    <Chip
-      label={target}
-      color={current < target ? "error" : "success"}
-      size="small"
-      variant="outlined"
-    />
-  );
-};
-
 export default function Overview() {
-  // TODO levels
-  const levels = _.fromPairs(_.map(statsGridOrder, (s) => [s, 30]));
-
   return (
     <div className="font-sans flex flex-col items-center">
       <h1 className="pb-4">Overview</h1>
@@ -84,63 +61,60 @@ export default function Overview() {
         </div>
       </div>
       <div className="pt-8">
-        <TableContainer>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Skill</TableCell>
-                <TableCell align="right">Level</TableCell>
-                <TableCell align="right">Quests</TableCell>
-                <TableCell align="right">Easy diary</TableCell>
-                <TableCell align="right">Medium diary</TableCell>
-                <TableCell align="right">Hard diary</TableCell>
-                <TableCell align="right">Elite diary</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {_.map(skills, (skill, key) => (
-                <TableRow
-                  key={key}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell>{skill.name}</TableCell>
-                  <TableCell align="right">{levels[key]}</TableCell>
-                  <TableCell align="right">
-                    <LevelChip
-                      target={10}
-                      /* TODO quest levels */ current={levels[key]}
-                    />
-                  </TableCell>
-                  <TableCell align="right">
-                    <LevelChip
-                      target={skill.diaryLevels.easy}
-                      current={levels[key]}
-                    />
-                  </TableCell>
-                  <TableCell align="right">
-                    <LevelChip
-                      target={skill.diaryLevels.medium}
-                      current={levels[key]}
-                    />
-                  </TableCell>
-                  <TableCell align="right">
-                    <LevelChip
-                      target={skill.diaryLevels.hard}
-                      current={levels[key]}
-                    />
-                  </TableCell>
-                  <TableCell align="right">
-                    <LevelChip
-                      target={skill.diaryLevels.elite}
-                      current={levels[key]}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <LevelOverviewTable />
       </div>
     </div>
+  );
+}
+
+function LevelOverviewTable() {
+  return (
+    <TableContainer>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Skill</TableCell>
+            <TableCell align="right">Level</TableCell>
+            <TableCell align="right">Quests</TableCell>
+            <TableCell align="right">Easy diary</TableCell>
+            <TableCell align="right">Medium diary</TableCell>
+            <TableCell align="right">Hard diary</TableCell>
+            <TableCell align="right">Elite diary</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {_.map(skills, (skill, key) => (
+            <TableRow
+              key={key}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell>{skill.name}</TableCell>
+              <TableCell align="right">
+                <ClientLevel skill={key} />
+              </TableCell>
+              <TableCell align="right">
+                <LevelChip
+                  skill={key}
+                  /* TODO quest levels */
+                  level={10}
+                />
+              </TableCell>
+              <TableCell align="right">
+                <LevelChip skill={key} level={skill.diaryLevels.easy} />
+              </TableCell>
+              <TableCell align="right">
+                <LevelChip skill={key} level={skill.diaryLevels.medium} />
+              </TableCell>
+              <TableCell align="right">
+                <LevelChip skill={key} level={skill.diaryLevels.hard} />
+              </TableCell>
+              <TableCell align="right">
+                <LevelChip skill={key} level={skill.diaryLevels.elite} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
