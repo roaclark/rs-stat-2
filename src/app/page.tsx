@@ -1,17 +1,7 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import _ from "lodash";
-
 import skills from "@/data/skills";
 import ClientLevel from "@/components/ClientLevel";
 import LevelUpdateButton from "@/components/LevelUpdateButton";
-import { LevelChip } from "./LevelChip";
+import { LevelOverviewTable } from "@/components/LevelOverviewTable";
 
 const statsGridOrder = [
   "attack",
@@ -64,57 +54,5 @@ export default function Overview() {
         <LevelOverviewTable />
       </div>
     </div>
-  );
-}
-
-function LevelOverviewTable() {
-  return (
-    <TableContainer>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Skill</TableCell>
-            <TableCell align="right">Level</TableCell>
-            <TableCell align="right">Quests</TableCell>
-            <TableCell align="right">Easy diary</TableCell>
-            <TableCell align="right">Medium diary</TableCell>
-            <TableCell align="right">Hard diary</TableCell>
-            <TableCell align="right">Elite diary</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {_.map(skills, (skill, key) => (
-            <TableRow
-              key={key}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell>{skill.name}</TableCell>
-              <TableCell align="right">
-                <ClientLevel skill={key} />
-              </TableCell>
-              <TableCell align="right">
-                <LevelChip
-                  skill={key}
-                  /* TODO quest levels */
-                  level={10}
-                />
-              </TableCell>
-              <TableCell align="right">
-                <LevelChip skill={key} level={skill.diaryLevels.easy} />
-              </TableCell>
-              <TableCell align="right">
-                <LevelChip skill={key} level={skill.diaryLevels.medium} />
-              </TableCell>
-              <TableCell align="right">
-                <LevelChip skill={key} level={skill.diaryLevels.hard} />
-              </TableCell>
-              <TableCell align="right">
-                <LevelChip skill={key} level={skill.diaryLevels.elite} />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
   );
 }

@@ -7,9 +7,11 @@ import { use } from "react";
 export const LevelChip = ({
   skill,
   level,
+  diff,
 }: {
   skill: string;
   level: number;
+  diff?: boolean;
 }) => {
   const { stats, isPending } = use(PlayerLevelContext);
   const current = stats[skill]?.level;
@@ -18,13 +20,15 @@ export const LevelChip = ({
     return <Chip label="??" color="error" size="small" variant="outlined" />;
   }
 
-  if (level === 0) {
+  const color = isPending ? "default" : current < level ? "error" : "success";
+
+  if (level === 0 || (diff && current >= level)) {
     return;
   }
   return (
     <Chip
-      label={level}
-      color={isPending ? "default" : current < level ? "error" : "success"}
+      label={diff ? level - current : level}
+      color={color}
       size="small"
       variant="outlined"
     />
